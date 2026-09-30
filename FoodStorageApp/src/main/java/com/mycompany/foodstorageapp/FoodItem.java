@@ -4,10 +4,25 @@
  */
 package com.mycompany.foodstorageapp;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 /**
  *
  * @author pc
  */
 public class FoodItem {
-    
+  
+
+    private String name;
+    private double weight;
+    private LocalDate bestBefore;
+    private LocalDateTime timePlaced;
+
+    public FoodItem(String name, double weight, LocalDate bestBefore) {
+        this.name = name;
+        this.weight = weight;
+        this.bestBefore = bestBefore;
+        this.timePlaced = LocalDateTime.now();
+    }
 }
