@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.testingproject;
+package com.mycompany.foodstorageapp;
 
 /**
  *
  * @author pc
  */
-public class foodQueue {
-    private foodItem[] queue;
+public class FoodQueue {
+    private FoodItem[] queue;
     private int front;
     private int rear;
     private int size;
@@ -17,9 +17,9 @@ public class foodQueue {
     
     
     
-    public foodQueue(int capacity){
+    public FoodQueue(int capacity){
         this.capacity = capacity;
-        queue = new foodItem[capacity];
+        queue = new FoodItem[capacity];
         
         front = -1;
         rear = -1;
@@ -34,7 +34,7 @@ public class foodQueue {
             return size == capacity;
         }
         
-        public boolean enqueue(foodItem food){
+        public boolean enqueue(FoodItem food){
             if(isFull()){
                 System.out.println("\nQueue is full");
                 System.out.println("Maximum capacity is 8");
@@ -54,13 +54,13 @@ public class foodQueue {
             return true;
         }
         
-        public foodItem dequeue(){
+        public FoodItem dequeue(){
             if(isEmpty()){
                 System.out.println("\nqueue is empty");
                 System.out.println("there is no food item to remove");
                 return null;
             }
-            foodItem removedFood = queue[front];
+            FoodItem removedFood = queue[front];
             queue[front]= null;
             
             if(size == 1){
@@ -72,6 +72,54 @@ public class foodQueue {
             size--;
             return removedFood;
         }
+        public FoodItem peek(){
+            if(isEmpty()){
+                System.out.println("\nqueue is empty");
+                System.out.println("there is no item at the front");
+                return null;
+            }
+            return queue[front];
+        }
         
+        public void display(){
+            if(isEmpty()){
+                System.out.println("\nqueue is empty");
+                return;
+            }
+            
+            System.out.println("\n==============CIRCULAR QUEUE=============");
+            
+            for(int i= 0; i<size; i++){
+                int index = (front + i )%capacity;
+                System.out.println("\nposition: " + (i + 1));
+                System.out.println("------------------------");
+                queue[index].displayInfo();
+            }
+            System.out.println("\n=====================");
+        }
+        
+        public void search(String foodName){
+            if(isEmpty()){
+                System.out.println("\nqueue is empty");
+                return;
+            }
+            
+            boolean found = false;
+            
+            for(int i = 0; i<size; i++){
+                int index =(front + i)% capacity;
+                
+                if(queue[index].getName().equalsIgnoreCase(foodName)){
+                    System.out.println("\nfood item found");
+                    System.out.println("------------------------");
+                    queue[index].displayInfo();
+                    System.out.println("---------------------------");
+                    found = true;
+                }
+            }
+            if(!found){
+                System.out.println("\nfood item not found");
+            }
+        }
     }
     
