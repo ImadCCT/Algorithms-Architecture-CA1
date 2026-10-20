@@ -29,7 +29,7 @@ public class foodStack {
 
         return top == capacity - 1;
     } 
-     public boolean push(foodItem food) {
+     public boolean push(FoodItem food) {
 
         if (isFull()) {
 
@@ -47,7 +47,7 @@ public class foodStack {
         return true;
     }
 
-    public foodItem pop() {
+    public FoodItem pop() {
 
         if (isEmpty()) {
 
@@ -57,7 +57,7 @@ public class foodStack {
             return null;
         }
 
-        foodItem removedFood = stack[top];
+        FoodItem removedFood = stack[top];
 
         stack[top] = null;
         top--;
@@ -65,7 +65,7 @@ public class foodStack {
         return removedFood;
     }
 
-    public foodItem peek() {
+    public FoodItem peek() {
 
         if (isEmpty()) {
 
