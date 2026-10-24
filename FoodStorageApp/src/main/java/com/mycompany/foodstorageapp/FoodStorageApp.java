@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.foodstorageapp;
+package com.mycompany.testingproject;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author pc
  */
-public class FoodStorageApp {
+public class TestingProject {
 
     public static void main(String[] args) {
 
@@ -22,7 +22,7 @@ public class FoodStorageApp {
         final int CAPACITY = 8;
 
         foodStack stack = new foodStack(CAPACITY);
-        FoodQueue queue = new FoodQueue(CAPACITY);
+        foodQueue queue = new foodQueue(CAPACITY);
 
         String[] allowedFoods = {
             "Burger",
@@ -118,37 +118,47 @@ public class FoodStorageApp {
 
             } catch (NumberFormatException e) {
 
-                System.out.println("\nInvalid input. " + "Please enter 1 to 6.");
+                System.out.println(
+                        "\nInvalid input. "
+                        + "Please enter 1 to 6.");
 
                 continue;
-                
-                switch (choice) {
-                    
-                    // ==================================
+            }
+
+            switch (choice) {
+
+                // ==================================
                 // ADD
                 // ==================================
-                    case 1:
+
+                case 1:
 
                     // Check capacity before asking for details
-                    if (structureChoice == 1 && stack.isFull()) {
+                    if (structureChoice == 1 &&
+                            stack.isFull()) {
 
-                        System.out.println("\nStack is full.");
-
-                        break;
-                    }
-                    
-                    if (structureChoice == 2 && queue.isFull()) {
-
-                        System.out.println("\nQueue is full.");
+                        System.out.println(
+                                "\nStack is full.");
 
                         break;
                     }
-                    
-                     // FOOD NAME
 
-                    System.out.print("\nEnter food name: ");
+                    if (structureChoice == 2 &&
+                            queue.isFull()) {
 
-                    String foodName = sc.nextLine().trim();
+                        System.out.println(
+                                "\nQueue is full.");
+
+                        break;
+                    }
+
+                    // FOOD NAME
+
+                    System.out.print(
+                            "\nEnter food name: ");
+
+                    String foodName =
+                            sc.nextLine().trim();
 
                     boolean validFood = false;
 
@@ -162,38 +172,47 @@ public class FoodStorageApp {
                             break;
                         }
                     }
-                    
-                     if (!validFood) {
 
-                        System.out.println("\nInvalid food name.");
+                    if (!validFood) {
 
-                        System.out.println("Allowed foods are:");
+                        System.out.println(
+                                "\nInvalid food name.");
+
+                        System.out.println(
+                                "Allowed foods are:");
 
                         for (String food : allowedFoods) {
 
-                            System.out.println("- " + food);
+                            System.out.println(
+                                    "- " + food);
                         }
 
                         break;
                     }
-                     
-                     // WEIGHT
+
+                    // WEIGHT
 
                     double weight;
 
                     while (true) {
 
-                        System.out.print("Enter weight in grams: ");
+                        System.out.print(
+                                "Enter weight in grams: ");
 
-                        String weightInput = sc.nextLine();
+                        String weightInput =
+                                sc.nextLine();
 
                         try {
 
-                            weight = Double.parseDouble(weightInput);
+                            weight =
+                                    Double.parseDouble(
+                                            weightInput);
 
                             if (weight <= 0) {
 
-                                System.out.println( "Weight must be " + "greater than 0.");
+                                System.out.println(
+                                        "Weight must be "
+                                        + "greater than 0.");
 
                                 continue;
                             }
@@ -202,54 +221,251 @@ public class FoodStorageApp {
 
                         } catch (NumberFormatException e) {
 
-                            System.out.println("Invalid weight. " + "Please enter a number.");
+                            System.out.println(
+                                    "Invalid weight. "
+                                    + "Please enter a number.");
                         }
                     }
-                    
+
                     // BEST-BEFORE DATE
 
                     LocalDate bestBefore;
 
                     while (true) {
 
-                        System.out.print("Enter best-before date " + "(dd/MM/yyyy): ");
+                        System.out.print(
+                                "Enter best-before date "
+                                + "(dd/MM/yyyy): ");
 
-                        String dateInput = sc.nextLine();
+                        String dateInput =
+                                sc.nextLine();
 
                         try {
 
-                            bestBefore = LocalDate.parse(dateInput,dateFormat);
+                            bestBefore =
+                                    LocalDate.parse(
+                                            dateInput,
+                                            dateFormat);
 
-                            LocalDate today = LocalDate.now();
+                            LocalDate today =
+                                    LocalDate.now();
 
-                            LocalDate maximumDate = today.plusDays(14);
+                            LocalDate maximumDate =
+                                    today.plusDays(14);
 
                             if (bestBefore.isBefore(today)) {
 
-                                System.out.println("Best-before date " + "cannot be in the past.");
+                                System.out.println(
+                                        "Best-before date "
+                                        + "cannot be in the past.");
 
                                 continue;
                             }
 
-                            if (bestBefore.isAfter(maximumDate)) {
+                            if (bestBefore.isAfter(
+                                    maximumDate)) {
 
-                                System.out.println("Best-before date cannot " + "be more than 14 days " + "from today.");
+                                System.out.println(
+                                        "Best-before date cannot "
+                                        + "be more than 14 days "
+                                        + "from today.");
 
                                 continue;
                             }
 
                             break;
 
-                        } catch (DateTimeParseException e) {
+                        } catch (
+                                DateTimeParseException e) {
 
-                            System.out.println("Invalid date format. " + "Please use dd/MM/yyyy.");
+                            System.out.println(
+                                    "Invalid date format. "
+                                    + "Please use dd/MM/yyyy.");
                         }
                     }
 
-                }
-                
-              
+                    // CREATE FOOD OBJECT
+
+                    foodItem newFood =
+                            new foodItem(
+                                    foodName,
+                                    weight,
+                                    bestBefore);
+
+                    // ADD TO SELECTED STRUCTURE
+
+                    if (structureChoice == 1) {
+
+                        stack.push(newFood);
+
+                    } else {
+
+                        queue.enqueue(newFood);
+                    }
+
+                    break;
+
+                // ==================================
+                // REMOVE
+                // ==================================
+
+                case 2:
+
+                    foodItem removedFood;
+
+                    if (structureChoice == 1) {
+
+                        removedFood =
+                                stack.pop();
+
+                    } else {
+
+                        removedFood =
+                                queue.dequeue();
+                    }
+
+                    if (removedFood != null) {
+
+                        System.out.println(
+                                "\nRemoved food item:");
+
+                        System.out.println(
+                                "----------------------------------");
+
+                        removedFood.displayInfo();
+
+                        System.out.println(
+                                "----------------------------------");
+                    }
+
+                    break;
+
+                // ==================================
+                // PEEK
+                // ==================================
+
+                case 3:
+
+                    foodItem selectedFood;
+
+                    if (structureChoice == 1) {
+
+                        selectedFood =
+                                stack.peek();
+
+                    } else {
+
+                        selectedFood =
+                                queue.peek();
+                    }
+
+                    if (selectedFood != null) {
+
+                        System.out.println(
+                                "\nFood item at the front:");
+
+                        System.out.println(
+                                "----------------------------------");
+
+                        selectedFood.displayInfo();
+
+                        System.out.println(
+                                "----------------------------------");
+                    }
+
+                    break;
+
+                // ==================================
+                // DISPLAY
+                // ==================================
+
+                case 4:
+
+                    if (structureChoice == 1) {
+
+                        stack.display();
+
+                    } else {
+
+                        queue.display();
+                    }
+
+                    break;
+
+                // ==================================
+                // SEARCH
+                // ==================================
+
+                case 5:
+
+                    System.out.print(
+                            "\nEnter food name to search: ");
+
+                    String searchName =
+                            sc.nextLine().trim();
+
+                    boolean validSearchFood = false;
+
+                    for (String food : allowedFoods) {
+
+                        if (food.equalsIgnoreCase(
+                                searchName)) {
+
+                            searchName = food;
+                            validSearchFood = true;
+
+                            break;
+                        }
+                    }
+
+                    if (!validSearchFood) {
+
+                        System.out.println(
+                                "\nInvalid food name.");
+
+                        System.out.println(
+                                "Allowed foods are:");
+
+                        for (String food : allowedFoods) {
+
+                            System.out.println(
+                                    "- " + food);
+                        }
+
+                        break;
+                    }
+
+                    if (structureChoice == 1) {
+
+                        stack.search(searchName);
+
+                    } else {
+
+                        queue.search(searchName);
+                    }
+
+                    break;
+
+                // ==================================
+                // EXIT
+                // ==================================
+
+                case 6:
+
+                    System.out.println(
+                            "\nThank you for using the "
+                            + "Fast Food Storage System.");
+
+                    sc.close();
+
+                    return;
+
+                default:
+
+                    System.out.println(
+                            "\nInvalid choice. "
+                            + "Please select 1 to 6.");
+            }
         }
-    }
     }
 }
