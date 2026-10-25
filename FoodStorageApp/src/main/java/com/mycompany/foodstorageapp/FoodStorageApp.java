@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
-package com.mycompany.testingproject;
+package com.mycompany.foodstorageapp;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author pc
  */
-public class TestingProject {
+public class FoodStorageApp {
 
     public static void main(String[] args) {
 
@@ -22,7 +22,7 @@ public class TestingProject {
         final int CAPACITY = 8;
 
         foodStack stack = new foodStack(CAPACITY);
-        foodQueue queue = new foodQueue(CAPACITY);
+        FoodQueue queue = new FoodQueue(CAPACITY);
 
         String[] allowedFoods = {
             "Burger",
@@ -32,8 +32,7 @@ public class TestingProject {
             "Hotdog"
         };
 
-        DateTimeFormatter dateFormat =
-                DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         // ==========================================
         // CHOOSE DATA STRUCTURE
@@ -57,23 +56,18 @@ public class TestingProject {
 
             try {
 
-                structureChoice =
-                        Integer.parseInt(input);
+                structureChoice = Integer.parseInt(input);
 
-                if (structureChoice == 1 ||
-                        structureChoice == 2) {
+                if (structureChoice == 1 || structureChoice == 2) {
 
                     break;
                 }
 
-                System.out.println(
-                        "\nPlease choose 1 or 2.");
+                System.out.println(  "\nPlease choose 1 or 2.");
 
             } catch (NumberFormatException e) {
 
-                System.out.println(
-                        "\nInvalid input. "
-                        + "Please enter 1 or 2.");
+                System.out.println( "\nInvalid input. "  + "Please enter 1 or 2.");
             }
         }
 
@@ -93,8 +87,7 @@ public class TestingProject {
 
             } else {
 
-                System.out.println(
-                        "Current Structure: CIRCULAR QUEUE");
+                System.out.println( "Current Structure: CIRCULAR QUEUE");
             }
 
             System.out.println("------------------------------------");
@@ -134,31 +127,25 @@ public class TestingProject {
                 case 1:
 
                     // Check capacity before asking for details
-                    if (structureChoice == 1 &&
-                            stack.isFull()) {
+                    if (structureChoice == 1 && stack.isFull()) {
 
-                        System.out.println(
-                                "\nStack is full.");
+                        System.out.println( "\nStack is full.");
 
                         break;
                     }
 
-                    if (structureChoice == 2 &&
-                            queue.isFull()) {
+                    if (structureChoice == 2 && queue.isFull()) {
 
-                        System.out.println(
-                                "\nQueue is full.");
+                        System.out.println( "\nQueue is full.");
 
                         break;
                     }
 
                     // FOOD NAME
 
-                    System.out.print(
-                            "\nEnter food name: ");
+                    System.out.print(  "\nEnter food name: ");
 
-                    String foodName =
-                            sc.nextLine().trim();
+                    String foodName = sc.nextLine().trim();
 
                     boolean validFood = false;
 
@@ -166,8 +153,7 @@ public class TestingProject {
 
                         if (food.equalsIgnoreCase(foodName)) {
 
-                            foodName = food;
-                            validFood = true;
+                            foodName = food; validFood = true;
 
                             break;
                         }
@@ -175,16 +161,13 @@ public class TestingProject {
 
                     if (!validFood) {
 
-                        System.out.println(
-                                "\nInvalid food name.");
+                        System.out.println(  "\nInvalid food name.");
 
-                        System.out.println(
-                                "Allowed foods are:");
+                        System.out.println( "Allowed foods are:");
 
                         for (String food : allowedFoods) {
 
-                            System.out.println(
-                                    "- " + food);
+                            System.out.println( "- " + food);
                         }
 
                         break;
@@ -196,23 +179,18 @@ public class TestingProject {
 
                     while (true) {
 
-                        System.out.print(
-                                "Enter weight in grams: ");
+                        System.out.print( "Enter weight in grams: ");
 
-                        String weightInput =
-                                sc.nextLine();
+                        String weightInput = sc.nextLine();
 
                         try {
 
-                            weight =
-                                    Double.parseDouble(
-                                            weightInput);
+                            weight = Double.parseDouble( weightInput);
 
                             if (weight <= 0) {
 
                                 System.out.println(
-                                        "Weight must be "
-                                        + "greater than 0.");
+                                        "Weight must be " + "greater than 0.");
 
                                 continue;
                             }
@@ -221,9 +199,7 @@ public class TestingProject {
 
                         } catch (NumberFormatException e) {
 
-                            System.out.println(
-                                    "Invalid weight. "
-                                    + "Please enter a number.");
+                            System.out.println("Invalid weight. " + "Please enter a number.");
                         }
                     }
 
@@ -233,42 +209,28 @@ public class TestingProject {
 
                     while (true) {
 
-                        System.out.print(
-                                "Enter best-before date "
-                                + "(dd/MM/yyyy): ");
+                        System.out.print( "Enter best-before date "+ "(dd/MM/yyyy): ");
 
-                        String dateInput =
-                                sc.nextLine();
+                        String dateInput = sc.nextLine();
 
                         try {
 
-                            bestBefore =
-                                    LocalDate.parse(
-                                            dateInput,
-                                            dateFormat);
+                            bestBefore = LocalDate.parse( dateInput,dateFormat);
 
-                            LocalDate today =
-                                    LocalDate.now();
+                            LocalDate today = LocalDate.now();
 
-                            LocalDate maximumDate =
-                                    today.plusDays(14);
+                            LocalDate maximumDate = today.plusDays(14);
 
                             if (bestBefore.isBefore(today)) {
 
-                                System.out.println(
-                                        "Best-before date "
-                                        + "cannot be in the past.");
+                                System.out.println("Best-before date " + "cannot be in the past.");
 
                                 continue;
                             }
 
-                            if (bestBefore.isAfter(
-                                    maximumDate)) {
+                            if (bestBefore.isAfter( maximumDate)) {
 
-                                System.out.println(
-                                        "Best-before date cannot "
-                                        + "be more than 14 days "
-                                        + "from today.");
+                                System.out.println("Best-before date cannot " + "be more than 14 days "  + "from today.");
 
                                 continue;
                             }
@@ -278,19 +240,13 @@ public class TestingProject {
                         } catch (
                                 DateTimeParseException e) {
 
-                            System.out.println(
-                                    "Invalid date format. "
-                                    + "Please use dd/MM/yyyy.");
+                            System.out.println( "Invalid date format. " + "Please use dd/MM/yyyy.");
                         }
                     }
 
                     // CREATE FOOD OBJECT
 
-                    foodItem newFood =
-                            new foodItem(
-                                    foodName,
-                                    weight,
-                                    bestBefore);
+                    FoodItem newFood = new FoodItem(foodName,weight,bestBefore);
 
                     // ADD TO SELECTED STRUCTURE
 
@@ -311,31 +267,26 @@ public class TestingProject {
 
                 case 2:
 
-                    foodItem removedFood;
+                    FoodItem removedFood;
 
                     if (structureChoice == 1) {
 
-                        removedFood =
-                                stack.pop();
+                        removedFood = stack.pop();
 
                     } else {
 
-                        removedFood =
-                                queue.dequeue();
+                        removedFood = queue.dequeue();
                     }
 
                     if (removedFood != null) {
 
-                        System.out.println(
-                                "\nRemoved food item:");
+                        System.out.println( "\nRemoved food item:");
 
-                        System.out.println(
-                                "----------------------------------");
+                        System.out.println( "----------------------------------");
 
                         removedFood.displayInfo();
 
-                        System.out.println(
-                                "----------------------------------");
+                        System.out.println( "----------------------------------");
                     }
 
                     break;
@@ -346,31 +297,26 @@ public class TestingProject {
 
                 case 3:
 
-                    foodItem selectedFood;
+                    FoodItem selectedFood;
 
                     if (structureChoice == 1) {
 
-                        selectedFood =
-                                stack.peek();
+                        selectedFood = stack.peek();
 
                     } else {
 
-                        selectedFood =
-                                queue.peek();
+                        selectedFood = queue.peek();
                     }
 
                     if (selectedFood != null) {
 
-                        System.out.println(
-                                "\nFood item at the front:");
+                        System.out.println("\nFood item at the front:");
 
-                        System.out.println(
-                                "----------------------------------");
+                        System.out.println("----------------------------------");
 
                         selectedFood.displayInfo();
 
-                        System.out.println(
-                                "----------------------------------");
+                        System.out.println( "----------------------------------");
                     }
 
                     break;
@@ -398,11 +344,9 @@ public class TestingProject {
 
                 case 5:
 
-                    System.out.print(
-                            "\nEnter food name to search: ");
+                    System.out.print(  "\nEnter food name to search: ");
 
-                    String searchName =
-                            sc.nextLine().trim();
+                    String searchName = sc.nextLine().trim();
 
                     boolean validSearchFood = false;
 
@@ -420,16 +364,13 @@ public class TestingProject {
 
                     if (!validSearchFood) {
 
-                        System.out.println(
-                                "\nInvalid food name.");
+                        System.out.println( "\nInvalid food name.");
 
-                        System.out.println(
-                                "Allowed foods are:");
+                        System.out.println( "Allowed foods are:");
 
                         for (String food : allowedFoods) {
 
-                            System.out.println(
-                                    "- " + food);
+                            System.out.println(   "- " + food);
                         }
 
                         break;
@@ -452,9 +393,7 @@ public class TestingProject {
 
                 case 6:
 
-                    System.out.println(
-                            "\nThank you for using the "
-                            + "Fast Food Storage System.");
+                    System.out.println( "\nThank you for using the "  + "Fast Food Storage System.");
 
                     sc.close();
 
@@ -462,9 +401,7 @@ public class TestingProject {
 
                 default:
 
-                    System.out.println(
-                            "\nInvalid choice. "
-                            + "Please select 1 to 6.");
+                    System.out.println(  "\nInvalid choice. " + "Please select 1 to 6.");
             }
         }
     }
