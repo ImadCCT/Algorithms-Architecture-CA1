@@ -8,17 +8,17 @@ package com.mycompany.foodstorageapp;
  *
  * @author pc
  */
-public class FoodQueue {
+public class FoodQueue extends AbstractFoodStorage{
     private FoodItem[] queue;
     private int front;
     private int rear;
     private int size;
-    private final int capacity;
+   
     
     
     
     public FoodQueue(int capacity){
-        this.capacity = capacity;
+        super(capacity);
         queue = new FoodItem[capacity];
         
         front = -1;

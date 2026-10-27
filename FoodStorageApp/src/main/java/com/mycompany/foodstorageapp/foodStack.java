@@ -8,23 +8,24 @@ package com.mycompany.foodstorageapp;
  *
  * @author pc
  */
-public class foodStack {
+public class foodStack extends AbstractFoodStorage {
     private FoodItem[] stack;
-    private int top;
-    private final int capacity;
+    private int top; 
 
     public foodStack(int capacity) {
 
-        this.capacity = capacity;
+        super(capacity);
         stack = new FoodItem[capacity];
         top = -1;
     }
 
+    @Override
     public boolean isEmpty() {
 
         return top == -1;
     }
 
+    @Override
     public boolean isFull() {
 
         return top == capacity - 1;
@@ -65,6 +66,7 @@ public class foodStack {
         return removedFood;
     }
 
+    @Override
     public FoodItem peek() {
 
         if (isEmpty()) {
@@ -78,6 +80,7 @@ public class foodStack {
         return stack[top];
     }
 
+    @Override
     public void display() {
 
         if (isEmpty()) {
@@ -99,6 +102,7 @@ public class foodStack {
         System.out.println("\n==================================");
     }
 
+    @Override
     public void search(String foodName) {
 
         if (isEmpty()) {
